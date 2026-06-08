@@ -1,75 +1,82 @@
-# React + TypeScript + Vite
+# 📋 Task Manager
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+O **Task Manager** é uma aplicação web moderna e minimalista para gerenciamento
+de tarefas diárias. Desenvolvida utilizando **React**, **TypeScript** e **CSS
+Modules**, a aplicação foca em uma experiência fluida, limpa e com alta
+performance, garantindo que o usuário organize sua rotina com facilidade.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 📸 Demonstração
 
-## React Compiler
+Aqui está o visual final da aplicação (baseado no design limpo e responsivo):
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+<p align="center">
+  <img src="https://github.com/lucasmessias91/Task-Manager/blob/main/public/taskManagerApp.png?raw=true" alt="Task Manager Screenshot" width="100%" max-width="800px">
+</p>
 
-Note: This will impact Vite dev & build performances.
+---
 
-## Expanding the ESLint configuration
+## 🚀 Funcionalidades Corrigidas e Implementadas
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **Adicionar Tarefas:** Criação dinâmica de novas tarefas impedindo o envio de
+  campos vazios ou apenas com espaços.
+- **Marcar como Concluída:** Alternância de estado individual com efeito visual
+  translúcido e texto riscado (_strikethrough_).
+- **Excluir Tarefas:** Remoção segura da tarefa da lista usando filtragem
+  imutável de estado.
+- **Contador Dinâmico:** Exibição em tempo real no cabeçalho contendo o número
+  exato de tarefas que ainda estão pendentes.
+- **Persistência Local (LocalStorage):** As tarefas ficam salvas no navegador de
+  forma automática. O usuário pode recarregar a página ou fechar o navegador sem
+  perder nenhum dado.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+---
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## 🛠️ Tecnologias e Conceitos Utilizados
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+O projeto demonstra forte domínio de conceitos modernos de desenvolvimento
+frontend, estruturado da seguinte forma:
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+- **React (Functional Components):** Componentização inteligente e isolada para
+  melhor legibilidade e reutilização do código.
+- **TypeScript:** Tipagem estática rigorosa (`types` e `interfaces`) aplicada a
+  propriedades (Props), estados e eventos de formulário, mitigando bugs em tempo
+  de desenvolvimento.
+- **Hooks do React:**
+  - `useState`: Gerenciamento do estado local do formulário e do estado global
+    das tarefas.
+  - `useEffect`: Sincronização e persistência automática do array de dados com a
+    API do navegador.
+  - _Lazy Initialization:_ Carregamento otimizado do estado inicial lendo o
+    `localStorage` apenas uma única vez na inicialização do app.
+- **CSS Modules:** Estilização encapsulada por componente, garantindo que as
+  regras visuais não vazem e eliminando conflitos de escopo no CSS.
+- **Acessibilidade e Semântica:** Uso de HTML semântico (`<header>`, `<ul>`,
+  `<li>`) e tags de acessibilidade como `aria-label` para leitores de tela em
+  elementos essencialmente visuais.
+- **Design System com CSS Variables:** Uso centralizado de uma paleta de cores
+  voltada para um _Dark Mode_ elegante e confortável, facilitando futuras
+  manutenções.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+---
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## 📂 Estrutura do Projeto
+
+A arquitetura de pastas preza pela organização padrão de mercado:
+
+```text
+src/
+├── components/
+│   ├── Container/       # Componente de alinhamento estrutural
+│   ├── Header/          # Cabeçalho com dados de usuário e contador
+│   ├── TaskForm/        # Formulário de captação e validação de texto
+│   ├── TaskItem/        # Card individual de exibição da tarefa
+│   └── TaskList/        # Gerenciador de renderização da lista de cards
+├── styles/
+│   ├── theme.css        # Centralização de variáveis e cores (Design Tokens)
+│   └── global.css       # Estilos globais e resets do app
+├── App.tsx              # Componente central e gerenciador do estado imutável
+├── App.module.css       # Layout e envelopamento centralizado da aplicação
+└── main.tsx             # Ponto de entrada da aplicação
 ```
